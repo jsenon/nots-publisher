@@ -20,7 +20,7 @@ make
 
 Run Container
 ```
-docker run -d -e MY_NATSBOOTSTRAP="nats://localhost:4222"  jsenon/nats-publisher:latest
+docker run -d jsenon/nats-publisher:latest
 ```
 
 ## Run on K8S Cluster
@@ -30,8 +30,28 @@ Deploy POD
 kubectl apply -f k8s/deployment.yml
 ```
 
-## Env
+## Usage
 
+If you don't want to expose your producer externaly you can use port forward
+```
+kubectl port-forward nats-publisher-xxx 9010:9010 &
+```
 
-## Todo
+Use PostMan or Curl to send information to your producer
+```
+curl -X POST \
+  http://127.0.0.1:9010/publish \
+  -d '{
+	"nats":"nats://USER:PWD@nats:4222",
+	"subject":"kikoo",
+	"message":"Hello World"
+}'
+```
+
+Where:
+
+* nats: your nats server
+* suject: your topic
+* message: your message to sent
+
 
