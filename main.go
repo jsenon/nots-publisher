@@ -33,6 +33,7 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 	defer logger.Sync() // nolint: errcheck
 
@@ -54,5 +55,6 @@ func main() {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 }

@@ -42,6 +42,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 	defer logger.Sync() // nolint: errcheck
 	// var rs Server
@@ -58,6 +59,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 
 	err = json.Unmarshal(body, &msg) // nolint: gas
@@ -68,6 +70,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 
 	url := msg.Nats
@@ -83,6 +86,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 	defer natsConnection.Close()
 	logger.Info("Connected",
@@ -98,6 +102,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 			zap.Duration("backoff", time.Second),
 			zap.Error(err),
 		)
+		return
 	}
 	logger.Info("Publish",
 		zap.String("topic", subject),
