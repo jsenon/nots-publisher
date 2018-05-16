@@ -93,6 +93,7 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 		zap.String("target", url),
 		zap.String("ServerID", natsConnection.ConnectedServerId()),
 		zap.String("ConnectedServer", natsConnection.ConnectedUrl()),
+		zap.Strings("DiscoveredServers", natsConnection.Servers()),
 	)
 
 	// Publish message on subject
