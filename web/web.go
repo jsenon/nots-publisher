@@ -91,8 +91,8 @@ func Publish(res http.ResponseWriter, req *http.Request) {
 	defer natsConnection.Close()
 	logger.Info("Connected",
 		zap.String("target", url),
-		zap.Any("ServerID", natsConnection.ConnectedServerId),
-		zap.Any("ConnectedServer", natsConnection.ConnectedUrl),
+		zap.String("ServerID", natsConnection.ConnectedServerId()),
+		zap.String("ConnectedServer", natsConnection.ConnectedUrl()),
 	)
 
 	// Publish message on subject
